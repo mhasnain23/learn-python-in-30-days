@@ -28,6 +28,7 @@ is_false = False
 fruit:list[str] = ["Apple", "Banana", "Cherry"]
 print(fruit[0:2])
 # set (set)
+set_data:set = {"apple", "banana", "cherry"}
 # dictionary (dictionary)
 dict_data:dict = {
     "name": "hasnain",
