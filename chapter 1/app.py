@@ -66,6 +66,9 @@ for i in list_items:
         print(2)
     continue
 
+
+
+
 # def giaic ():
 #     print("Hello world from giaic!")
 
