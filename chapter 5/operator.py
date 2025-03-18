@@ -192,4 +192,7 @@ while True:
 grade = grading_system(marks)
 
 # Print the grade
-print(f"The grade for {marks} marks is: {grade}")
+print(f"The grade for {marks} marks is: {grade}") # type: ignore
+
+
+print("--------------------------------------------")
