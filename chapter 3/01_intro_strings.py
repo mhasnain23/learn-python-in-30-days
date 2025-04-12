@@ -1,3 +1,6 @@
+# I exoplre type casting in python
+# Type casting in Python is the process of converting one data type to another data type.
+
 a = "Hasnain"
 b = 'Hasnain'
 c = """Hasnain"""

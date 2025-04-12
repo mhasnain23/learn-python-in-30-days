@@ -15,4 +15,4 @@ print("id(tuple_2) = ", id(tuple_2)) # unique memory address
 print("tuple_1 == tuple_2 = ", tuple_1 == tuple_2) # comparing by value
 
 
-# tuples are immutable
+# tuples are immutable  tuple1[0] = "watermelon"
