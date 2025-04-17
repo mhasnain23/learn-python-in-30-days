@@ -35,3 +35,53 @@ def divide_numbers(a, b):
 divide_numbers(10, 2)  # Successful division
 divide_numbers(10, 0)  # ZeroDivisionError
 divide_numbers(10, "2")  # TypeError
+
+
+try:
+    num1 = float(input("Enter the first number: "))
+    num2 = float(input("Enter the second number: "))
+    result = num1 / num2
+except ValueError:
+    print("Error: Invalid input. Please enter numbers.")
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero.")
+else:
+    print(f"The result is: {result}")
+finally:
+    print("Thank you for using the program!")
+
+
+print("--------------------------------------------------")
+class NegativeNumberError(Exception):
+    """Custom exception for negative numbers"""
+
+    pass
+
+
+def check_positive(n):
+    if n < 0:
+        raise NegativeNumberError("Negative numbers are not allowed!")
+    return f"{n} is positive"
+
+
+try:
+    print(check_positive(-5))  # Raises NegativeNumberError
+except NegativeNumberError as e:
+    print(
+        f"Custom Exception Caught: {e}", " - Exception Class Type: ", type(e)
+    )  # Output: Custom Exception Caught: Negative numbers are not allowed!
+
+
+
+try:
+    num1 = float(input("Enter the first number: "))
+    num2 = float(input("Enter the second number: "))
+    result = num1 / num2
+except ValueError:
+    print("Error: Invalid input. Please enter numbers.")
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero.")
+else:
+    print(f"The result is: {result}")
+finally:
+    print("Thank you for using the program!")
