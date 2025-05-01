@@ -8,6 +8,7 @@ import threading
 import dotenv
 import os
 import google.generativeai as genai
+import musicLibrary
 
 # Initialize TTS engine
 engine = pyttsx3.init()
@@ -65,9 +66,11 @@ class Jarvis:
             )
             self.speak(f"Searching YouTube for {search_term}")
 
-    def play_youtube_video(self, link):
-        if "youtube.com" in link:
-            self.speak("Playing the YouTube video.")
+    def play_youtube_video(self, command):
+        if command.lower().startswith("play"):
+            song = command.lower().split(" ")[1]
+            link = musicLibrary.music[song]
+            self.speak(f"Playing {song}")
             webbrowser.open(link)
 
     def get_weather(self, city="Karachi"):
@@ -89,19 +92,6 @@ class Jarvis:
         except Exception as e:
             self.speak("Gemini AI service not responding.")
 
-    def set_reminder(self, reminder_text, reminder_time):
-        self.reminders.append((reminder_text, reminder_time))
-        self.speak(f"Reminder set for {reminder_time}.")
-
-    def check_reminders(self):
-        while True:
-            now = datetime.datetime.now().strftime("%H:%M")
-            for reminder in self.reminders:
-                if reminder[1] == now:
-                    self.speak(f"Reminder: {reminder[0]}")
-                    self.reminders.remove(reminder)
-            time.sleep(30)
-
     def run(self):
         threading.Thread(target=self.check_reminders, daemon=True).start()
 
@@ -118,22 +108,14 @@ class Jarvis:
                     break
                 elif "open" in command or "search" in command:
                     self.open_website(command)
-                elif "play video" in command:
-                    self.speak("Please paste the YouTube link.")
-                    link = self.listen()
-                    self.play_youtube_video(link)
+                elif "play" in command:
+                    self.play_youtube_video(command)
                 elif "weather" in command:
                     self.get_weather()
                 elif "ask ai" in command:
                     self.speak("What do you want to ask?")
                     question = self.listen()
                     self.ask_gemini(question)
-                elif "remind me" in command:
-                    self.speak("What should I remind you?")
-                    text = self.listen()
-                    self.speak("At what time? Say in HH:MM format.")
-                    time_text = self.listen()
-                    self.set_reminder(text, time_text)
                 else:
                     self.speak("Sorry, I can't handle that yet.")
 
@@ -147,3 +129,4 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if __name__ == "__main__":
     jarvis = Jarvis(GEMINI_API_KEY, WEATHER_API_KEY)
     jarvis.run()
+
