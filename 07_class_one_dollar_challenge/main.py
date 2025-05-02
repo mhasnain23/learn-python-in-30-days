@@ -2,8 +2,6 @@ import pyttsx3
 import speech_recognition as sr
 import webbrowser
 import requests
-import datetime
-import time
 import threading
 import dotenv
 import os
@@ -51,7 +49,7 @@ class Jarvis:
 
         for key in websites:
             if key in query:
-                self.speak(f"Opening {key}")
+                self.speak(f"Opening {query.replace('open ', '')}")
                 webbrowser.open(websites[key])
                 return
 
@@ -90,10 +88,10 @@ class Jarvis:
             answer = response.text
             self.speak(answer)
         except Exception as e:
+            print("Error:", e)
             self.speak("Gemini AI service not responding.")
 
     def run(self):
-        threading.Thread(target=self.check_reminders, daemon=True).start()
 
         self.speak("Hello! I'm Jarvis. say 'Jarvis' to wake me up.")
         while True:
