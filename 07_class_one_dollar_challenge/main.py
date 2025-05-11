@@ -127,4 +127,3 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if __name__ == "__main__":
     jarvis = Jarvis(GEMINI_API_KEY, WEATHER_API_KEY)
     jarvis.run()
-
